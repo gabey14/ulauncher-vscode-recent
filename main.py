@@ -173,7 +173,8 @@ class CodeExtension(Extension):
 
 
 class KeywordQueryEventListener(EventListener):
-	def on_event(self, event, extension):
+	@staticmethod
+	def on_event(event, extension):
 		items = []
 
 		if not extension.code.is_installed():
@@ -194,18 +195,21 @@ class KeywordQueryEventListener(EventListener):
 
 
 class ItemEnterEventListener(EventListener):
-	def on_event(self, event, extension):
+	@staticmethod
+	def on_event(event, extension):
 		recent = event.get_data()
 		extension.code.open_vscode(recent)
 
 
 class PreferencesEventListener(EventListener):
-	def on_event(self, event, extension):
+	@staticmethod
+	def on_event(event, extension):
 		extension.keyword = event.preferences["code_kw"]
 
 
 class PreferencesUpdateEventListener(EventListener):
-	def on_event(self, event, extension):
+	@staticmethod
+	def on_event(event, extension):
 		if event.id == "code_kw":
 			extension.keyword = event.new_value
 
